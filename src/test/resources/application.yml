@@ -1,0 +1,7 @@
+server:
+  port: 10344
+  address: localhost
+
+spring:
+  application:
+    name: 'React Universal App'

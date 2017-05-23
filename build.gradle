@@ -1,0 +1,142 @@
+buildscript {
+  repositories {
+    mavenCentral()
+    maven { url 'http://repo.spring.io/plugins-release' }
+    maven { url 'https://plugins.gradle.org/m2/' }
+  }
+  dependencies {
+    classpath group: 'org.springframework.boot', name: 'spring-boot-gradle-plugin', version: spring_boot_version
+    classpath group: 'org.springframework.build.gradle', name:'propdeps-plugin', version:'0.0.7'
+    classpath group: 'com.moowork.gradle', name:'gradle-node-plugin', version:'1.1.1'
+  }
+}
+
+group = 'bnr'
+
+ext.applicationName = "react-universal"
+
+apply plugin: 'idea'
+apply plugin: 'maven-publish'
+apply plugin: 'java'
+apply plugin: 'eclipse-wtp'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'war'
+apply plugin: 'propdeps'
+apply plugin: 'propdeps-idea'
+apply plugin: 'propdeps-eclipse'
+apply plugin: 'com.moowork.node'
+
+publishing {
+  publications {
+    artifactoryPublications(MavenPublication) {
+      artifact war
+    }
+  }
+}
+
+war {
+  archiveName = applicationName + ".war"
+  dependsOn jar
+
+  // Add the webpack output bundles to our war.
+  from ('build/dist') {
+    into 'WEB-INF/classes/static'
+  }
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+  mavenCentral()
+}
+
+configurations {
+  providedRuntime
+}
+
+dependencies {
+  compile group: 'org.springframework.boot', name: 'spring-boot-starter-web'
+  compile group: 'javax.inject', name: 'javax.inject', version: javax_inject_version
+
+  optional group: 'org.springframework.boot', name: 'spring-boot-configuration-processor'
+
+  testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test'
+}
+
+compileJava.dependsOn(processResources)
+
+eclipse {
+  classpath {
+    containers.remove('org.eclipse.jdt.launching.JRE_CONTAINER')
+    containers 'org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8'
+  }
+}
+
+///////////////////////////////////////////////////////////////////////////////
+//      TASKS
+///////////////////////////////////////////////////////////////////////////////
+
+task jsClean(type: Delete) {
+  delete 'build/dist', 'src/main/resources/static'
+}
+
+task jsCleanWarDist(type: Delete) {
+  delete 'build/dist'
+}
+
+task jsCleanEmbeddedDist(type: Delete) {
+  delete 'src/main/resources/static'
+}
+
+task jsCopy(type: Copy) {
+  from 'build/dist'
+  into 'src/main/resources/static'
+}
+
+// Task to run JS Tests.
+task jsTest(type: NpmTask) {
+  args = ['run', 'test']
+}
+
+// Task to do JS linting and report errors.
+task jsLint(type: NpmTask) {
+  args = ['run', 'lint']
+}
+
+// Task to check JS linting and perform fixing.
+task jsLintFix(type: NpmTask) {
+  args = ['run', 'lint:fix']
+}
+
+// This task does a webpack build
+task jsBuild(type: NpmTask) {
+  args = ['run', 'build']
+}
+
+// Task to do a webpack dev build, required when using webpack-dev-server
+task buildDev(type:  NpmTask) {
+  args = ['run', 'build:dev']
+}
+
+// Task to launch the webpack-dev-server
+task start(type: NpmTask) {
+    dependsOn buildDev
+  args = ['run', 'start']
+}
+
+task shrinkwrap(type:  NpmTask) {
+  args = ['shrinkwrap', '--dev']
+}
+
+task yarnInstall(type: NpmTask) {
+  args = ['run', 'yarn:install']
+}
+
+compileJava.dependsOn jsBuild,jsCopy
+jsBuild.dependsOn jsClean,jsTest
+bootRun.dependsOn jsCleanWarDist
+build.dependsOn jsCleanEmbeddedDist
+jsTest.dependsOn yarnInstall
+
+defaultTasks 'clean', 'build'

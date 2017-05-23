@@ -1,0 +1,4 @@
+--recursive
+--color
+--require ignore-styles
+scripts/mocha/browser.js src/main/web/app/**/*.spec.js
