@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "express": "^4.15.3",
     "history": "^4.6.1",
     "material-ui": "^0.17.4",
     "prop-types": "^15.5.8",
@@ -56,17 +57,18 @@
     "uglifyjs-webpack-plugin": "^0.4.2",
     "url-loader": "^0.5.8",
     "webpack": "2.3.3",
-    "webpack-dev-server": "2.4.2"
+    "webpack-dev-middleware": "^1.10.2",
+    "webpack-hot-middleware": "^2.18.0"
   },
   "main": "src/main/web/app/index.js",
   "name": "react-universal",
   "private": true,
   "scripts": {
-    "build": "webpack -p --progress --env.prod",
-    "build:dev": "webpack --progress --env.dev",
+    "build": "NODE_ENV=production webpack -p --progress",
+    "build:dev": "NODE_ENV=development webpack --progress",
     "lint": "eslint --ext=jsx --ext=js ./src",
     "lint:fix": "eslint --ext=jsx --ext=js --fix ./src",
-    "start": "webpack-dev-server --host 0.0.0.0 --progress --env.dev --watch-poll",
+    "start": "NODE_ENV=development node src/main/web/server/main",
     "test": "NODE_PATH=./src/main/web/app mocha --opts mocha.opts",
     "test:watch": "NODE_PATH=./src/main/web/app mocha --watch --opts ./src/main/web/mocha.opts",
     "yarn:install": "yarn install"
