@@ -4,11 +4,14 @@ const NODE_ENV = process.env.NODE_ENV || 'development'
 
 module.exports = {
   basename: 'react-universal',
+  host: 'localhost',
 
   /** The environment to use when building the project */
   env: NODE_ENV,
 
   paths: {
+    basePath: __dirname,
+    appDir: './src/main/web/app',
     app: './src/main/web/app/index.js',
     html: './src/main/web/app/index.html',
     favicon: './src/main/web/app/favicon.ico',

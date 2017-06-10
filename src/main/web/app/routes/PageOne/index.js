@@ -2,9 +2,9 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { renderRoutes } from 'react-router-config'
 import { Link } from 'react-router-dom'
-import FlatButton from 'material-ui/FlatButton'
 import FontIcon from 'material-ui/FontIcon'
-import {red500, yellow500, blue500} from 'material-ui/styles/colors'
+import { List, ListItem } from 'material-ui/List'
+import {red500, blue500} from 'material-ui/styles/colors'
 
 const styles = {
   iconStyles: {
@@ -21,21 +21,19 @@ class PageOne extends Component {
     const { route } = this.props
     return (
       <div className='column-container'>
-        <h2>Page One</h2>
-        <FlatButton label='Button' />
-        <br />
-        <br />
-        <h3>Google Icon Fonts</h3>
-        <div className='row-container'>
-          <FontIcon className='material-icons' style={styles.iconStyles}>home</FontIcon>
-          <FontIcon className='material-icons' style={styles.iconStyles} color={red500}>flight_takeoff</FontIcon>
-          <FontIcon className='material-icons' style={styles.iconStyles} color={yellow500}>cloud_download</FontIcon>
-          <FontIcon className='material-icons' style={styles.iconStyles} color={blue500}>videogame_asset</FontIcon>
-        </div>
-        <ul>
-          <li><Link to='/pageOne/A'>Route A</Link></li>
-          <li><Link to='/pageOne/B'>Route B</Link></li>
-        </ul>
+        <h2>Page With Sub-Routes</h2>
+        <List>
+          <ListItem primaryText='' leftIcon={
+            <FontIcon className='material-icons' style={styles.iconStyles} color={red500}>flight_takeoff</FontIcon>
+          }>
+            <Link to='/pageOne/A'>Sub-route A</Link>
+          </ListItem>
+          <ListItem primaryText='' leftIcon={
+            <FontIcon className='material-icons' style={styles.iconStyles} color={blue500}>videogame_asset</FontIcon>
+          }>
+            <Link to='/pageOne/B'>Sub-route B</Link>
+          </ListItem>
+        </List>
         {renderRoutes(route.routes)}
       </div>
     )

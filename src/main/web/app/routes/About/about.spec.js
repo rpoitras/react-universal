@@ -18,6 +18,6 @@ describe('<About />', () => {
   })
 
   it('renders', () => {
-    expect(component).to.have.length.of(1)
+    expect(component).to.have.lengthOf(1)
   })
 })

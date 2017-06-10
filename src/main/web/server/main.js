@@ -7,22 +7,26 @@ const projectCfg = require('../../../../project.config')
 const app = express()
 const compiler = webpack(webpackCfg)
 
-app.use(require('webpack-dev-middleware')(compiler, {
+const webpackDevMiddleware = require('webpack-dev-middleware')(compiler, {
   noInfo: true,
-  publicPath: webpackCfg.output.publicPath
-}))
-
+  hot: true,
+  quiet: true,
+  lazy: false,
+  publicPath: webpackCfg.output.publicPath,
+  contentBase: path.resolve(projectCfg.paths.basePath, projectCfg.paths.appDir)
+})
+app.use(webpackDevMiddleware)
 app.use(require('webpack-hot-middleware')(compiler))
 
-app.get('*', function(req, res, next) {
-  const filename = path.join(compiler.outputPath, 'index.html')
-  compiler.outputFileSystem.readFile(filename, function(err, result) {
+// webpack-dev-middleware uses memory-fs internally to store build artifacts
+const fs = webpackDevMiddleware.fileSystem
+app.get('*', (req, res) => {
+  fs.readFile(path.join(compiler.outputPath, 'index.html'), (err, file) => {
     if (err) {
-      return next(err)
+      res.sendStatus(404)
+    } else {
+      res.send(file.toString())
     }
-    res.set('content-type', 'text/html')
-    res.set(result)
-    res.end()
   })
 })
 
