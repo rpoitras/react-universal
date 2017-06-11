@@ -1,6 +1,4 @@
-coverage/**
 node_modules/**
 build/**
-src/main/web/app/index.html
-src/main/web/app/utils/test/**
-scripts/**
+app/index.html
+app/utils/test/**

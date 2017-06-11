@@ -12,9 +12,6 @@ class About extends Component {
             <a href='https://facebook.github.io/react'>React</a>
           </li>
           <li>
-            <a href='http://spring.io/'>Spring</a>
-          </li>
-          <li>
             <a href='http://redux.js.org/'>Redux</a>
           </li>
           <li>
