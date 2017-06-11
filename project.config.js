@@ -11,18 +11,19 @@ module.exports = {
 
   paths: {
     basePath: __dirname,
-    appDir: './src/main/web/app',
-    app: './src/main/web/app/index.js',
-    html: './src/main/web/app/index.html',
-    favicon: './src/main/web/app/favicon.ico',
-    src: path.resolve(__dirname, 'src/main/web/app'),
-    dist: path.resolve(__dirname, 'build/dist'),
-    routes: path.resolve(__dirname, 'src/main/web/app/routes'),
-    assets: path.resolve(__dirname, 'src/main/web/app/assets'),
+    appDir: './app',
+    app: './app/index.js',
+    html: './app/index.html',
+    favicon: './app/favicon.ico',
+    src: path.resolve(__dirname, 'app'),
+    dist: path.resolve(__dirname, 'build'),
+    routes: path.resolve(__dirname, 'app/routes'),
+    assets: path.resolve(__dirname, 'app/assets'),
     react: path.resolve(__dirname, 'node_modules/react')
   },
 
   devServerPort: 4000,
+  prodServerPort: 4100,
 
   vendor: [
     'material-ui',

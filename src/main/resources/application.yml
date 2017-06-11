@@ -1,7 +1,0 @@
-server:
-  port: 8093
-  contextPath: '/react-universal'
-
-spring:
-  application:
-    name: 'React Universal App'
