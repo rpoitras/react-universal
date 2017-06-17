@@ -9,6 +9,9 @@ import {red500, blue500} from 'material-ui/styles/colors'
 const styles = {
   iconStyles: {
     marginRight: '24px'
+  },
+  container: {
+    flexGrow: 1
   }
 }
 
@@ -20,7 +23,7 @@ class PageOne extends Component {
   render () {
     const { route } = this.props
     return (
-      <div className='column-container'>
+      <div style={styles.container} className='column-container'>
         <h2>Page With Sub-Routes</h2>
         <h3>Sub-route is rendered as a Partial on the same page as the Parent</h3>
         <List>

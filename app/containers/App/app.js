@@ -32,6 +32,17 @@ class App extends Component {
       appLogo: defaultLogo
     }
     this.styles = {
+      layout: {
+        height: '100%',
+        display: 'flex',
+        flexDirection: 'column'
+      },
+      routesContainer: {
+        flexGrow: 1,
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'stretch'
+      },
       forceNavDown: {
         top: '64px'
       },
@@ -73,7 +84,7 @@ class App extends Component {
 
     return (
       <MuiThemeProvider muiTheme={getMuiTheme()}>
-        <div>
+        <div style={this.styles.layout}>
           <AppBar
             id='app-bar'
             title={<div style={this.getLogoStyle()} />}
@@ -109,7 +120,9 @@ class App extends Component {
                 containerElement={<Link to='/about' />}>About</MenuItem>
             </Menu>
           </Drawer>
-          {renderRoutes(route.routes)}
+          <div style={this.styles.routesContainer}>
+            {renderRoutes(route.routes)}
+          </div>
         </div>
       </MuiThemeProvider>
     )

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { renderRoutes } from 'react-router-config'
-import { BrowserRouter } from 'react-router-dom'
+import { ConnectedRouter } from 'react-router-redux'
 import { Provider } from 'react-redux'
 
 import routes from '../../routes/routes'
@@ -13,11 +13,9 @@ class Root extends Component {
   render () {
     return (
       <Provider store={this.props.store}>
-        <BrowserRouter basename='/react-universal' history={this.props.history}>
-          <div>
-            {renderRoutes(routes)}
-          </div>
-        </BrowserRouter>
+        <ConnectedRouter basename='/react-universal' history={this.props.history}>
+          {renderRoutes(routes)}
+        </ConnectedRouter>
       </Provider>
     )
   }

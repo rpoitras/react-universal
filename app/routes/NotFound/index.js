@@ -1,6 +1,12 @@
 import React, { Component } from 'react'
 import { history } from '../../store'
 
+const styles = {
+  container: {
+    flexGrow: 1
+  }
+}
+
 const goBack = (e) => {
   e.preventDefault()
   return history.goBack()
@@ -9,9 +15,11 @@ const goBack = (e) => {
 class NotFound extends Component {
   render () {
     return (
-      <div className='column-container'>
-        <h4>Page Not Found</h4>
-        <p><a href='#' onClick={goBack}>&larr; Back</a></p>
+      <div style={styles.container}>
+        <div className='column-container'>
+          <h4>Page Not Found</h4>
+          <p><a href='#' onClick={goBack}>&larr; Back</a></p>
+        </div>
       </div>
     )
   }
