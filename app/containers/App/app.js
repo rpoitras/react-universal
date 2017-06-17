@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { withRouter } from 'react-router'
-import { renderRoutes } from 'react-router-config'
 import { Link } from 'react-router-dom'
 
 import AppBar from 'material-ui/AppBar'
@@ -17,12 +15,13 @@ import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert'
 
 import defaultLogo from 'assets/cool-icon.png'
 
+import Routes from '../../routes/routes'
+
 class App extends Component {
   static propTypes = {
     match: PropTypes.object.isRequired,
     location: PropTypes.object.isRequired,
-    history: PropTypes.object.isRequired,
-    route: PropTypes.object.isRequired
+    history: PropTypes.object.isRequired
   }
 
   constructor (props) {
@@ -76,11 +75,10 @@ class App extends Component {
   render () {
     // match, location and history are unused, provided by withRouter
     // Just wanted to have them here as an example/reminder
-    const { match, location, history, route } = this.props
+    const { match, location, history } = this.props
     console.log('App => match', match)
     console.log('App => location', location)
     console.log('App => history', history)
-    console.log('App => route,', route)
 
     return (
       <MuiThemeProvider muiTheme={getMuiTheme()}>
@@ -121,7 +119,7 @@ class App extends Component {
             </Menu>
           </Drawer>
           <div style={this.styles.routesContainer}>
-            {renderRoutes(route.routes)}
+            <Routes />
           </div>
         </div>
       </MuiThemeProvider>
@@ -129,4 +127,4 @@ class App extends Component {
   }
 }
 
-export default withRouter(App)
+export default App

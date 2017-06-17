@@ -3,7 +3,7 @@
 const chalk = require('chalk')
 const ip = require('ip')
 
-const divider = chalk.gray('\n-----------------------------------')
+const divider = chalk.gray('\n---------------------------------------------------------------------')
 
 /**
  * Logger middleware, add customized logger functions as needed
@@ -19,7 +19,8 @@ const logger = {
   appStarted: (port, host, name) => {
     console.log(`Server started ${chalk.green('✓')}`)
 
-    const devMsg = process.env.NODE_ENV === 'development' ? 'Webpack build running...' : ''
+    const devMsg = process.env.NODE_ENV === 'development'
+      ? 'Webpack build running. Wait for \'webpack built\' log statement.' : ''
 
     console.log(
       `${chalk.bold('Access URLs:')}${divider}

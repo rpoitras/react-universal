@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { renderRoutes } from 'react-router-config'
-import { Link } from 'react-router-dom'
+import { Link, Route } from 'react-router-dom'
 import FontIcon from 'material-ui/FontIcon'
 import { List, ListItem } from 'material-ui/List'
 import {red500, blue500} from 'material-ui/styles/colors'
+import PageOneA from './components/PageOneA'
+import PageOneB from './components/PageOneB'
 
 const styles = {
   iconStyles: {
@@ -17,11 +18,11 @@ const styles = {
 
 class PageOne extends Component {
   static propTypes = {
-    route: PropTypes.object.isRequired
+    match: PropTypes.object.isRequired
   }
 
   render () {
-    const { route } = this.props
+    const { url } = this.props.match
     return (
       <div style={styles.container} className='column-container'>
         <h2>Page With Sub-Routes</h2>
@@ -35,7 +36,7 @@ class PageOne extends Component {
                 style={styles.iconStyles} color={red500}>flight_takeoff
               </FontIcon>
             }
-            containerElement={<Link to='/pageOne/A' />}
+            containerElement={<Link to={`${url}/A`} />}
           />
           <ListItem
             primaryText='Sub-route B'
@@ -46,10 +47,11 @@ class PageOne extends Component {
                 color={blue500}>videogame_asset
               </FontIcon>
             }
-            containerElement={<Link to='/pageOne/B' />}
+            containerElement={<Link to={`${url}/B`} />}
           />
+          <Route path={`${url}/A`} component={PageOneA} />
+          <Route path={`${url}/B`} component={PageOneB} />
         </List>
-        {renderRoutes(route.routes)}
       </div>
     )
   }
