@@ -12,7 +12,7 @@ describe('<PageOne />', () => {
   beforeEach(() => {
     component = shallow(
       <MuiThemeProvider muiTheme={getMuiTheme()}>
-        <PageOne route={{}} />
+        <PageOne match={{}} />
       </MuiThemeProvider>
     )
   })

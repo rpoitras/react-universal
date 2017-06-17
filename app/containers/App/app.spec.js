@@ -12,7 +12,7 @@ describe('<App />', () => {
   beforeEach(() => {
     component = shallow(
       <MuiThemeProvider muiTheme={getMuiTheme()}>
-        <App />
+        <App match={{}} location={{}} history={{}} />
       </MuiThemeProvider>
     )
   })
