@@ -6,7 +6,7 @@ const { JSDOM } = jsdom
 const exposedProperties = ['window', 'navigator', 'document']
 
 const { window } = new JSDOM('')
-const { document } = (new JSDOM('')).window
+// const { document } = (new JSDOM('')).window
 
 Object.keys(window.document.defaultView).forEach((property) => {
   if (typeof global[property] === 'undefined') {
