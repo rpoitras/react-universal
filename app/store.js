@@ -8,7 +8,7 @@ import rootReducer, { getDefaultInitialState } from './reducers'
 const initialState = getDefaultInitialState()
 
 // Set up the router history off the base application name.
-export const history = createBrowserHistory({ basename: 'react-universal' })
+export const history = createBrowserHistory({ basename: '/react-universal' })
 const historyRouterMiddleware = routerMiddleware(history)
 
 // Build up the store
