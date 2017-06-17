@@ -1,5 +1,5 @@
 import { createStore, applyMiddleware, compose } from 'redux'
-import { syncHistoryWithStore, routerMiddleware } from 'react-router-redux'
+import { routerMiddleware } from 'react-router-redux'
 import createBrowserHistory from 'history/createBrowserHistory'
 
 import rootReducer, { getDefaultInitialState } from './reducers'
@@ -8,8 +8,8 @@ import rootReducer, { getDefaultInitialState } from './reducers'
 const initialState = getDefaultInitialState()
 
 // Set up the router history off the base application name.
-const browserHistory = createBrowserHistory()
-const historyRouterMiddleware = routerMiddleware(browserHistory)
+export const history = createBrowserHistory({ basename: `/${process.env.APP_BASE_NAME}` })
+const historyRouterMiddleware = routerMiddleware(history)
 
 // Build up the store
 let composeEnhancers = null
@@ -21,4 +21,3 @@ if (process.env.NODE_ENV === 'development') {
 export const store = createStore(rootReducer, initialState, composeEnhancers(
   applyMiddleware(historyRouterMiddleware)
 ))
-export const history = syncHistoryWithStore(browserHistory, store)

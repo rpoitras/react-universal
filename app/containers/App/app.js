@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { withRouter } from 'react-router'
-import { renderRoutes } from 'react-router-config'
 import { Link } from 'react-router-dom'
 
 import AppBar from 'material-ui/AppBar'
@@ -17,12 +15,13 @@ import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert'
 
 import defaultLogo from 'assets/cool-icon.png'
 
+import Routes from '../../routes/routes'
+
 class App extends Component {
   static propTypes = {
     match: PropTypes.object.isRequired,
     location: PropTypes.object.isRequired,
-    history: PropTypes.object.isRequired,
-    route: PropTypes.object.isRequired
+    history: PropTypes.object.isRequired
   }
 
   constructor (props) {
@@ -32,6 +31,17 @@ class App extends Component {
       appLogo: defaultLogo
     }
     this.styles = {
+      layout: {
+        height: '100%',
+        display: 'flex',
+        flexDirection: 'column'
+      },
+      routesContainer: {
+        flexGrow: 1,
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'stretch'
+      },
       forceNavDown: {
         top: '64px'
       },
@@ -65,15 +75,14 @@ class App extends Component {
   render () {
     // match, location and history are unused, provided by withRouter
     // Just wanted to have them here as an example/reminder
-    const { match, location, history, route } = this.props
+    const { match, location, history } = this.props
     console.log('App => match', match)
     console.log('App => location', location)
     console.log('App => history', history)
-    console.log('App => route,', route)
 
     return (
       <MuiThemeProvider muiTheme={getMuiTheme()}>
-        <div>
+        <div style={this.styles.layout}>
           <AppBar
             id='app-bar'
             title={<div style={this.getLogoStyle()} />}
@@ -109,11 +118,13 @@ class App extends Component {
                 containerElement={<Link to='/about' />}>About</MenuItem>
             </Menu>
           </Drawer>
-          {renderRoutes(route.routes)}
+          <div style={this.styles.routesContainer}>
+            <Routes />
+          </div>
         </div>
       </MuiThemeProvider>
     )
   }
 }
 
-export default withRouter(App)
+export default App

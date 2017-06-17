@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
+import { Route } from 'react-router-dom'
 import PropTypes from 'prop-types'
-import { renderRoutes } from 'react-router-config'
-import { BrowserRouter } from 'react-router-dom'
+import { ConnectedRouter } from 'react-router-redux'
 import { Provider } from 'react-redux'
 
-import routes from '../../routes/routes'
+import App from '../App/app'
 
 /*
  * The application top level route.
@@ -13,11 +13,9 @@ class Root extends Component {
   render () {
     return (
       <Provider store={this.props.store}>
-        <BrowserRouter basename='/react-universal' history={this.props.history}>
-          <div>
-            {renderRoutes(routes)}
-          </div>
-        </BrowserRouter>
+        <ConnectedRouter basename='/react-universal' history={this.props.history}>
+          <Route path='/' component={App} />
+        </ConnectedRouter>
       </Provider>
     )
   }
