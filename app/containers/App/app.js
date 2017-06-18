@@ -108,7 +108,7 @@ class App extends Component {
             <Menu>
               <MenuItem
                 onTouchTap={this.handleRequestChange}
-                containerElement={<Link to='/pageOne' />}>Page One</MenuItem>
+                containerElement={<Link to='/nestedPartial' />}>Nested Partial</MenuItem>
               <Divider />
               <MenuItem
                 onTouchTap={this.handleRequestChange}
