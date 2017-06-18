@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Link, Route } from 'react-router-dom'
+import { Link, Route, Switch } from 'react-router-dom'
 import FontIcon from 'material-ui/FontIcon'
 import { List, ListItem } from 'material-ui/List'
 import {red500, blue500} from 'material-ui/styles/colors'
 import PageOneA from './components/PageOneA'
 import PageOneB from './components/PageOneB'
+import NotFound from '../NotFound'
 
 const styles = {
   iconStyles: {
@@ -21,8 +22,20 @@ class PageOne extends Component {
     match: PropTypes.object.isRequired
   }
 
+  renderRoute (url, isExact) {
+    if (!isExact) {
+      return (
+        <Switch>
+          <Route path={`${url}/A`} component={PageOneA} />
+          <Route path={`${url}/B`} component={PageOneB} />
+          <Route component={NotFound} />
+        </Switch>
+      )
+    }
+  }
+
   render () {
-    const { url } = this.props.match
+    const { url, isExact } = this.props.match
     return (
       <div style={styles.container} className='column-container'>
         <h2>Page With Sub-Routes</h2>
@@ -49,9 +62,8 @@ class PageOne extends Component {
             }
             containerElement={<Link to={`${url}/B`} />}
           />
-          <Route path={`${url}/A`} component={PageOneA} />
-          <Route path={`${url}/B`} component={PageOneB} />
         </List>
+        {this.renderRoute(url, isExact)}
       </div>
     )
   }
