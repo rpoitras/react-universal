@@ -120,6 +120,8 @@ webpackConfig.module = {
 }
 
 webpackConfig.plugins = [
+  new webpack.optimize.ModuleConcatenationPlugin(),
+
   new webpack.HotModuleReplacementPlugin(),
 
   new webpack.NoEmitOnErrorsPlugin(),
