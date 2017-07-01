@@ -27,7 +27,14 @@ const addDevMiddlewares = (app, webpackCfg, projectCfg) => {
   })
 
   app.use(middleware)
-  app.use(webpackHotMiddleware(compiler))
+
+  app.use(webpackHotMiddleware(compiler, {
+    path: `/${projectCfg.basename}/__webpack_hmr`,
+    timeout: 20000,
+    heartbeat: 10 * 1000,
+    reload: true,
+    dynamicPublicPath: true
+  }))
 
   // webpackDevMiddleware uses memory-fs internally to store build artifacts
   const fs = middleware.fileSystem

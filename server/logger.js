@@ -20,7 +20,7 @@ const logger = {
     console.log(`Server started ${chalk.green('✓')}`)
 
     const devMsg = process.env.NODE_ENV === 'development'
-      ? 'Webpack build running. Wait for \'webpack built\' log statement.' : ''
+      ? 'Webpack build running. Please wait for \'webpack built\' log statement.' : ''
 
     console.log(
       `${chalk.bold('Access URLs:')}${divider}
