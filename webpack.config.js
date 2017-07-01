@@ -39,7 +39,7 @@ webpackConfig.entry = {
     project.paths.app
   ] : [
     'react-hot-loader/patch',
-    'webpack-hot-middleware/client?quiet=true',
+    `webpack-hot-middleware/client?path=/${project.basename}/__webpack_hmr`,
     'babel-polyfill',
     project.paths.app
   ],
