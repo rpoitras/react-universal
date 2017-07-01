@@ -5,7 +5,7 @@ import React from 'react'
 import injectTapEventPlugin from 'react-tap-event-plugin'
 import { AppContainer } from 'react-hot-loader'
 
-import { store, history } from './store'
+import store, { history } from './store'
 import Root from './containers/Root'
 
 import '../style/common.css'

@@ -17,7 +17,6 @@ module.exports = {
     favicon: './app/favicon.ico',
     src: path.resolve(__dirname, 'app'),
     dist: path.resolve(__dirname, 'build'),
-    routes: path.resolve(__dirname, 'app/routes'),
     assets: path.resolve(__dirname, 'app/assets'),
     react: path.resolve(__dirname, 'node_modules/react')
   },

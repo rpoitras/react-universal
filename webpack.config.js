@@ -44,8 +44,6 @@ webpackConfig.entry = {
     project.paths.app
   ],
 
-  route: project.paths.routes + '/routes.js',
-
   vendor: project.vendor
 }
 
@@ -120,6 +118,8 @@ webpackConfig.module = {
 }
 
 webpackConfig.plugins = [
+  new webpack.optimize.ModuleConcatenationPlugin(),
+
   new webpack.HotModuleReplacementPlugin(),
 
   new webpack.NoEmitOnErrorsPlugin(),
