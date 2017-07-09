@@ -6,6 +6,7 @@
 1.  ~~Once HMR is working with the Express server in dev environment, support production too.~~
 1.  ~~When production is working, remove the Spring server.~~
 1.  ~~Add Docker support with nginx.~~
+1.  Do something universal.
 
 ## Quick Start
 
