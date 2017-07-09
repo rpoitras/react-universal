@@ -34,7 +34,7 @@ if (__DEV__) {
 }
 
 webpackConfig.entry = {
-  js: __PROD__ ? [
+  app: __PROD__ ? [
     'babel-polyfill',
     project.paths.app
   ] : [

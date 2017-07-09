@@ -67,7 +67,7 @@
   "private": true,
   "scripts": {
     "clean": "rimraf ./build",
-    "build": "yarn run clean && yarn run lint:fix && NODE_ENV=production webpack -p --progress",
+    "build": "yarn run lint:fix && NODE_ENV=production webpack -p --progress",
     "build:dev": "yarn run lint:fix && NODE_ENV=development webpack --progress",
     "lint": "eslint --ext=jsx --ext=js ./src",
     "lint:fix": "eslint --ext=jsx --ext=js --fix ./app",
