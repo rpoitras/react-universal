@@ -10,42 +10,55 @@
 
 ## Quick Start
 
-Install dependencies:
+### Requirements
+* [yarn](https://yarnpkg.com/en/)
+* [node](https://nodejs.org/en/)
+* [nodemon](https://nodemon.io/) - optional, replace `nodemon` with `node` in `package.json` to skip server monitoring
+* [docker](https://www.docker.com/) - optional
+
+### Install dependencies:
 ```
 yarn install
 ```
 
-Run development build with hot module replacement:
+### Run development build with hot module replacement:
 ```
 yarn start
 ```
+run with http://localhost:4000/react-universal
 
-Run production:
+### Run production:
 ```
 yarn run start:prod
 ```
 
-Docker build:
+### Docker build:
 ```
 docker build -t react-universal-prod-i .
 ```
 
-See the Docker image file layers:
+### See the Docker image file layers:
 ```
 docker history react-universal-prod-i
 ```
 
-Run the Docker images:
+### Run the Docker images:
+```
+docker run -d --name react-universal -p 443:443 react-universal-prod-i
+```
+run with https://localhost/react-universal
+
 ```
 docker run -d --name react-universal -p 4100:8090 react-universal-prod-i
 ```
+run with http://localhost:4100/react-univesal, requires changing production port in `project.config.js`
 
-Connect to running container:
+### Connect to running container:
 ```
 docker exec -it react-universal bash
 ```
 
-To stop the Docker container:
+### To stop the Docker container:
 ```
 docker stop react-universal
 ```
