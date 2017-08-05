@@ -2,7 +2,8 @@ const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
+const Visualizer = require('webpack-visualizer-plugin')
+const CompressionPlugin = require('compression-webpack-plugin')
 
 const project = require('./project.config')
 
@@ -42,9 +43,7 @@ webpackConfig.entry = {
     `webpack-hot-middleware/client?path=/${project.basename}/__webpack_hmr`,
     'babel-polyfill',
     project.paths.app
-  ],
-
-  vendor: project.vendor
+  ]
 }
 
 webpackConfig.output = {
@@ -126,11 +125,6 @@ webpackConfig.plugins = [
 
   HtmlWebpackPluginConfig,
 
-  new webpack.optimize.CommonsChunkPlugin({
-    name: 'vendor',
-    minChunks: Infinity
-  }),
-
   new ExtractTextPlugin({
     filename: __DEV__ ? '[name].css' : '[name].[chunkhash].style.css',
     disable: false,
@@ -144,13 +138,19 @@ webpackConfig.plugins = [
       'APP_BASE_NAME': JSON.stringify(project.basename),
       'APP_DEV_SERVER_PORT': project.devServerPort
     }
+  }),
+
+  new CompressionPlugin({
+    asset: '[path].gz[query]',
+    algorithm: 'gzip',
+    test: /\.(js|jsx|html)$/,
+    threshold: 10240,
+    minRatio: 0.8
+  }),
+
+  new Visualizer({
+    filename: './statistics.html'
   })
 ]
-
-if (__PROD__) {
-  webpackConfig.plugins.push(
-    new UglifyJSPlugin()
-  )
-}
 
 module.exports = webpackConfig

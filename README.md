@@ -32,8 +32,9 @@ run with http://localhost:4000/react-universal
 yarn run start:prod
 ```
 
-### Docker build:
+### Build the Docker image:
 ```
+yarn run build
 docker build -t react-universal-prod-i .
 ```
 
@@ -42,7 +43,7 @@ docker build -t react-universal-prod-i .
 docker history react-universal-prod-i
 ```
 
-### Run the Docker images:
+### Create and Run Docker Container:
 ```
 docker run -d --name react-universal -p 443:443 react-universal-prod-i
 ```

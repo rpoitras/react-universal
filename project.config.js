@@ -22,16 +22,5 @@ module.exports = {
   },
 
   devServerPort: 4000,
-  prodServerPort: 4100,
-
-  vendor: [
-    'material-ui',
-    'react',
-    'react-dom',
-    'react-redux',
-    'react-router',
-    'react-router-redux',
-    'react-tap-event-plugin',
-    'redux'
-  ]
+  prodServerPort: 4100
 }

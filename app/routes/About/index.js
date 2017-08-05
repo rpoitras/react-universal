@@ -24,6 +24,9 @@ class About extends Component {
             <li>
               <a href='http://www.material-ui.com/#/'>Material UI</a>
             </li>
+            <li>
+              <a href='statistics.html'>Application Statistics</a>
+            </li>
           </ul>
         </div>
       </div>
