@@ -2,6 +2,8 @@ FROM kyma/docker-nginx
 
 COPY conf/nginx.conf /etc/nginx/nginx.conf
 
+COPY conf/default-ssl /etc/nginx/sites-available/default-ssl
+
 COPY build/ /var/www/react-universal
 
 ADD conf/server.crt /etc/nginx/ssl/

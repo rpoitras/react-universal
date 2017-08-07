@@ -66,6 +66,11 @@
   "private": true,
   "scripts": {
     "clean": "rimraf ./build",
+    "clean:docker": "docker container rm react-universal ; docker image rm react-universal-prod-i",
+    "build:docker": "docker build -t react-universal-prod-i .",
+    "run:docker": "docker run --name react-universal -p 443:443 react-universal-prod-i",
+    "stop:docker": "docker stop react-universal",
+    "docker": "yarn run stop:docker && yarn run clean:docker && yarn run build:docker && yarn run run:docker",
     "build": "yarn run clean && yarn run lint:fix && NODE_ENV=production webpack -p",
     "build:dev": "yarn run lint:fix && NODE_ENV=development webpack --progress",
     "lint": "eslint --ext=jsx --ext=js ./src",

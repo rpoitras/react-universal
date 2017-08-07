@@ -63,3 +63,9 @@ docker exec -it react-universal bash
 ```
 docker stop react-universal
 ```
+
+### To delete the Docker container and image:
+```
+docker container rm react-universal
+docker image rm react-universal-prod-i
+```
