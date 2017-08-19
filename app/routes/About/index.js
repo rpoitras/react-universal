@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 
 const styles = {
   container: {
@@ -32,10 +31,6 @@ class About extends Component {
       </div>
     )
   }
-}
-
-About.propTypes = {
-  muiTheme: PropTypes.object
 }
 
 export default About
