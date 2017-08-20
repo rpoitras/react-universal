@@ -1,28 +1,28 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import RaisedButton from 'material-ui/RaisedButton'
-import reactLogo from 'assets/react.png'
+import reactLogo from 'assets/react.svg'
 import dockerLogo from 'assets/dockerwhalehero.jpg'
 import nginxLogo from 'assets/nginx_logo.png'
+import './home.css'
 
 const styles = {
   container: {
     flexGrow: 1
   },
   reactImg: {
-    width: '200px',
-    height: '200px',
-    padding: '20px 40px 10px 40px'
+    width: '300px',
+    height: '300px'
   },
   dockerImg: {
     width: '195px',
     height: '195px',
-    padding: '20px 42px 24px 25px'
+    padding: '20px 42px 58px 25px'
   },
   nginxImg: {
     width: '160px',
     height: '160px',
-    padding: '20px 25px 30px 5px'
+    padding: '20px 30px 66px 0'
   }
 }
 class Home extends Component {
@@ -34,6 +34,7 @@ class Home extends Component {
           <div>
             <span>
               <img
+                className='react-logo'
                 src={reactLogo}
                 alt='React'
                 style={styles.reactImg}
