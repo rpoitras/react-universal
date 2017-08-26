@@ -12,17 +12,18 @@ const styles = {
   },
   reactImg: {
     width: '300px',
-    height: '300px'
+    height: '300px',
+    padding: '0 0 0 0'
   },
   dockerImg: {
     width: '195px',
     height: '195px',
-    padding: '20px 42px 58px 25px'
+    padding: '20px 30px 58px 0'
   },
   nginxImg: {
     width: '160px',
     height: '160px',
-    padding: '20px 30px 66px 0'
+    padding: '20px 10px 66px 50px'
   }
 }
 class Home extends Component {
@@ -33,22 +34,28 @@ class Home extends Component {
           <h1>React Universal App</h1>
           <div>
             <span>
-              <img
-                className='react-logo'
-                src={reactLogo}
-                alt='React'
-                style={styles.reactImg}
-              />
-              <img
-                src={nginxLogo}
-                alt='nginx'
-                style={styles.nginxImg}
-              />
-              <img
-                src={dockerLogo}
-                alt='Docker'
-                style={styles.dockerImg}
-              />
+              <a href='https://www.nginx.com/resources/wiki/' target='_blank'>
+                <img
+                  src={nginxLogo}
+                  alt='nginx'
+                  style={styles.nginxImg}
+                />
+              </a>
+              <a href='https://facebook.github.io/react/' target='_blank'>
+                <img
+                  className='react-logo'
+                  src={reactLogo}
+                  alt='React'
+                  style={styles.reactImg}
+                />
+              </a>
+              <a href='https://www.docker.com/community-edition' target='_blank'>
+                <img
+                  src={dockerLogo}
+                  alt='Docker'
+                  style={styles.dockerImg}
+                />
+              </a>
             </span>
           </div>
           <br />

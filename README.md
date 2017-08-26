@@ -33,12 +33,13 @@ yarn run start:prod
 ```
 
 ### Build the Docker image:
+This application can also be run as a Docker container on nginx:
 ```
 yarn run build
 docker build -t react-universal-prod-i .
 ```
 
-### See the Docker image file layers:
+### View Docker image file layers:
 ```
 docker history react-universal-prod-i
 ```
