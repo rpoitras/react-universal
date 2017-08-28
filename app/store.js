@@ -1,4 +1,5 @@
-import { createStore, applyMiddleware, compose } from 'redux'
+import { createStore, applyMiddleware } from 'redux'
+import { composeWithDevTools } from 'redux-devtools-extension/logOnlyInProduction'
 import { routerMiddleware } from 'react-router-redux'
 import createBrowserHistory from 'history/createBrowserHistory'
 import rootReducer, { getDefaultInitialState } from './reducers'
@@ -11,13 +12,7 @@ export const history = createBrowserHistory({ basename: '/react-universal' })
 const historyRouterMiddleware = routerMiddleware(history)
 
 // Build up the store
-let composeEnhancers = null
-if (process.env.NODE_ENV === 'development') {
-  composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
-} else {
-  composeEnhancers = compose
-}
-const store = createStore(rootReducer, initialState, composeEnhancers(
+const store = createStore(rootReducer, initialState, composeWithDevTools(
   applyMiddleware(historyRouterMiddleware)
 ))
 
