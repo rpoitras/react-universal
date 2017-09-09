@@ -1,0 +1,11 @@
+FROM node:argon
+
+RUN mkdir /react-universal
+WORKDIR /react-universal
+COPY . /react-universal
+
+ENV NODE_ENV=development
+
+EXPOSE 4000
+
+CMD ["npm", "run", "start:dev"]

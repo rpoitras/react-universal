@@ -6,7 +6,7 @@
 1.  ~~Once HMR is working with the Express server in dev environment, support production too.~~
 1.  ~~When production is working, remove the Spring server.~~
 1.  ~~Add Docker support with nginx.~~
-1.  Do something universal.
+1.  Add some server side rendering.
 
 ## Quick Start
 
@@ -32,41 +32,50 @@ run with http://localhost:4000/react-universal
 yarn run start:prod
 ```
 
-### Build the Docker image:
-This application can also be run as a Docker container on nginx:
+### Using Docker Compose
+Requires [Docker Compose](#https://docs.docker.com/compose/)
+
+Using the Docker style of react-universal starts two containers. One production and
+one for development. The production versions exposes URLs on two ports (443 and 8090).
+The SSL on https://localhost/react-universal and unsecured on http://localhost:8090/react-universal.
+The development access on http://localhost:4000/react-universal supports React Hot Module replacement
+as well as change detection on the Express server thanks to nodemon.
+
+To start:
 ```
-yarn run build
-docker build -t react-universal-prod-i .
+$ docker-compose up
 ```
 
-### View Docker image file layers:
+To force build and start:
 ```
-docker history react-universal-prod-i
-```
-
-### Create and Run Docker Container:
-```
-docker run -d --name react-universal -p 443:443 react-universal-prod-i
-```
-run with https://localhost/react-universal
-
-```
-docker run -d --name react-universal -p 4100:8090 react-universal-prod-i
-```
-run with http://localhost:4100/react-univesal, requires changing production port in `project.config.js`
-
-### Connect to running container:
-```
-docker exec -it react-universal bash
+$ docker-compose up --build
 ```
 
-### To stop the Docker container:
+Check the status of the running containers:
 ```
-docker stop react-universal
+docker ps
+CONTAINER ID        IMAGE                COMMAND                CREATED             STATUS              PORTS                                                  NAMES
+ed2914f613b9        reactuniversal_dev   "npm run start:dev"    10 minutes ago      Up 10 minutes       0.0.0.0:4000->4000/tcp                                 reactuniversal_dev_1
+862f6dc7a839        reactuniversal_web   "/bin/sh -c 'nginx'"   10 minutes ago      Up 10 minutes       0.0.0.0:443->443/tcp, 80/tcp, 0.0.0.0:8090->8090/tcp   reactuniversal_web_1
 ```
 
-### To delete the Docker container and image:
+The following URLs are available on the browser:
+
+1.  https://localhost/react-universal
+1.  http://localhost:8090/react-universal
+1.  http://localhost:4000/react-universal - debug version with full hot module replacement
+
+Stop containers:
 ```
-docker container rm react-universal
-docker image rm react-universal-prod-i
+docker stop reactuniversal_dev_1 reactuniversal_web_1
+```
+
+Remove containers:
+```
+docker container rm reactuniversal_dev_1 reactuniversal_web_1
+```
+
+Remove images:
+```
+docker image rm reactuniversal_dev reactuniversal_web
 ```
