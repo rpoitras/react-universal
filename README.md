@@ -33,7 +33,7 @@ yarn run start:prod
 ```
 
 ### Using Docker Compose
-Requires [Docker Compose](#https://docs.docker.com/compose/)
+Requires [Docker Compose](https://docs.docker.com/compose/)
 
 Using the Docker style of react-universal starts two containers. One production and
 one for development. The production versions exposes URLs on two ports (443 and 8090).
