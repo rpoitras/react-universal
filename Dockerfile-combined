@@ -1,0 +1,50 @@
+#FROM kyma/docker-nginx
+FROM smebberson/alpine-nginx-nodejs
+
+# apply kyma to smebberson : see https://hub.docker.com/r/kyma/docker-nginx/~/dockerfile/
+RUN rm /etc/nginx/nginx.conf /etc/nginx/mime.types
+# using my nginx.conf ... later
+#COPY conf/kyma/docker-nginx/nginx.conf /etc/nginx/nginx.conf
+COPY conf/kyma/docker-nginx/basic.conf /etc/nginx/basic.conf
+COPY conf/kyma/docker-nginx/mime.types /etc/nginx/mime.types
+RUN mkdir /etc/nginx/ssl
+COPY conf/kyma/docker-nginx/default /etc/nginx/sites-enabled/default
+# using my default-ssl ... later
+#COPY conf/kyma/docker-nginx/default-ssl /etc/nginx/sites-available/default-ssl
+COPY conf/kyma/docker-nginx/directive-only /etc/nginx/directive-only
+COPY conf/kyma/docker-nginx/location /etc/nginx/location
+# expose both the HTTP (80) and HTTPS (443) ports
+#EXPOSE 80 443
+#EXPOSE 8092
+#CMD ["nginx"]
+
+#COPY server/ /var/www/api
+
+#COPY package.json /var/www/api
+
+COPY conf/nginx.conf /etc/nginx/nginx.conf
+COPY conf/default-ssl /etc/nginx/sites-available/default-ssl
+COPY build/ /var/www/react-universal/build
+COPY app/ /var/www/react-universal/app
+COPY node_modules/ /var/www/react-universal/node_modules
+COPY server/ /var/www/react-universal/server
+COPY internal/ var/www/react-universal/internal
+COPY package.json /var/www/react-universal/package.json
+COPY webpack.config.js /var/www/react-universal/webpack.config.js
+COPY project.config.js /var/www/react-universal/project.config.js
+ADD conf/server.crt /etc/nginx/ssl/
+ADD conf/server.key /etc/nginx/ssl/
+EXPOSE 80 443 8090
+
+ENV NODE_ENV=development NODE_PORT=4000
+
+#RUN ln -s /etc/nginx/sites-available/default-ssl /etc/nginx/sites-enabled/default-ssl
+
+# Stream the nginx logs to stdout and stderr
+#RUN ln -sf /dev/stdout /var/log/nginx/access.log && ln -sf /dev/stderr /var/log/nginx/error.log
+
+#RUN cd /var/www/api && npm install
+
+CMD ["node", "/var/www/react-universal/server/main.js"]
+
+#CMD 'nginx'

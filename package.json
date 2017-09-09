@@ -52,6 +52,7 @@
     "jsdom": "11.2.0",
     "json-loader": "0.5.7",
     "mocha": "3.5.0",
+    "nodemon": "^1.11.0",
     "raw-loader": "0.5.1",
     "react-hot-loader": "3.0.0-beta.6",
     "react-test-renderer": "15.6.1",
@@ -80,6 +81,7 @@
     "start": "yarn run yarn:install && NODE_ENV=development node server/main",
     "start:nodemon": "yarn run yarn:install && NODE_ENV=development nodemon server/main",
     "start:prod": "yarn run test && NODE_ENV=production node server/main",
+    "start:dev": "NODE_ENV=development node server/main",
     "test": "NODE_PATH=./app mocha --opts mocha.opts",
     "test:watch": "NODE_PATH=./app mocha --watch --opts ./mocha.opts",
     "yarn:install": "yarn install"

@@ -67,7 +67,7 @@ class WebSocketExample extends Component {
 
   wsConnect () {
     if (this.ws === null) {
-      this.ws = new WebSocket('ws://192.168.0.129:8020')
+      this.ws = new WebSocket('ws://192.168.0.104:3000/react-universal')
       console.log('this.ws', this.ws)
       this.ws.addEventListener('open', this.wsOpenCallback)
       this.ws.addEventListener('message', this.wsMessageCallback)

@@ -22,5 +22,5 @@ module.exports = {
   },
 
   devServerPort: 4000,
-  prodServerPort: 8090
+  prodServerPort: 4100
 }
