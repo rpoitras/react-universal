@@ -34,6 +34,13 @@ yarn run start:prod
 
 ### Using Docker Compose
 Requires [Docker Compose](#https://docs.docker.com/compose/)
+
+Using the Docker style of react-universal starts two containers. One production and
+one for development. The production versions exposes URLs on two ports (443 and 8090).
+The SSL on https://localhost/react-universal and unsecured on http://localhost:8090/react-universal.
+The development access on http://localhost:4000/react-universal supports React Hot Module replacement
+as well as change detection on the Express server thanks to nodemon.
+
 To start:
 ```
 $ docker-compose up
