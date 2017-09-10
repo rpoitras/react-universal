@@ -1,12 +1,9 @@
 # React Universal App
 
-## Moving from Spring Server to Express
-
-1.  ~~First step will be to replace the webpack dev server with an Express server.~~
-1.  ~~Once HMR is working with the Express server in dev environment, support production too.~~
-1.  ~~When production is working, remove the Spring server.~~
-1.  ~~Add Docker support with nginx.~~
-1.  Add some server side rendering.
+The project started as a place to move a backend web server from Tomcat to nginx.
+In the process other dominoes fell, Spring Web MVC and SpringBoot which were replaced
+by Node.js and Express. I also wanted to use Docker and eventually move to a 
+microservice architecture.
 
 ## Quick Start
 
@@ -79,3 +76,36 @@ Remove images:
 ```
 docker image rm reactuniversal_dev reactuniversal_web
 ```
+### Technology Stack
+
+## Core
+
+* [Reactjs](https://facebook.github.io/react/)
+* [Redux](http://redux.js.org/)
+* [React Router](https://reacttraining.com/react-router/)
+* [Material UI](http://www.material-ui.com/#/)
+
+## Tools, Development, and Test
+
+* [Babel](https://babeljs.io/)
+* [Chai](http://chaijs.com/)
+* [Mocha](https://mochajs.org/)
+* [Enzyme](http://airbnb.io/enzyme/index.html)
+* [Eslint](https://eslint.org/)
+* [JSDOM](https://github.com/tmpvar/jsdom)
+* [React Hot Loader](http://gaearon.github.io/react-hot-loader/)
+* [nodemon](https://nodemon.io/)
+
+## Web Server
+
+* [Node.js](https://nodejs.org/en/)
+* [Express](https://expressjs.com/)
+
+## Build and Bundling
+
+* [webpack](https://webpack.js.org/)
+
+## Deployment
+
+* [nginx](https://www.nginx.com/resources/wiki/community/)
+* [Docker](https://www.docker.com/community-edition)
