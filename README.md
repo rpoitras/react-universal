@@ -76,16 +76,16 @@ Remove images:
 ```
 docker image rm reactuniversal_dev reactuniversal_web
 ```
-### Technology Stack
+## Technology Stack
 
-## Core
+### Core
 
 * [Reactjs](https://facebook.github.io/react/)
 * [Redux](http://redux.js.org/)
 * [React Router](https://reacttraining.com/react-router/)
 * [Material UI](http://www.material-ui.com/#/)
 
-## Tools, Development, and Test
+### Tools, Development, and Test
 
 * [Babel](https://babeljs.io/)
 * [Chai](http://chaijs.com/)
@@ -96,16 +96,16 @@ docker image rm reactuniversal_dev reactuniversal_web
 * [React Hot Loader](http://gaearon.github.io/react-hot-loader/)
 * [nodemon](https://nodemon.io/)
 
-## Web Server
+### Web Server
 
 * [Node.js](https://nodejs.org/en/)
 * [Express](https://expressjs.com/)
 
-## Build and Bundling
+### Build and Bundling
 
 * [webpack](https://webpack.js.org/)
 
-## Deployment
+### Deployment
 
 * [nginx](https://www.nginx.com/resources/wiki/community/)
 * [Docker](https://www.docker.com/community-edition)
