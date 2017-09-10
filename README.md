@@ -35,7 +35,7 @@ Requires [Docker Compose](https://docs.docker.com/compose/)
 Using the Docker style of react-universal starts two containers. One production and
 one for development. The production versions exposes URLs on two ports (443 and 8090).
 The SSL on https://localhost/react-universal and unsecured on http://localhost:8090/react-universal.
-The development access on http://localhost:4000/react-universal supports React Hot Module replacement
+The development access on http://localhost:4000/react-universal has React Hot Module replacement
 as well as change detection on the Express server thanks to nodemon.
 
 To start:
@@ -78,12 +78,17 @@ docker image rm reactuniversal_dev reactuniversal_web
 ```
 ## Technology Stack
 
-### Core
+### Web Client
 
 * [Reactjs](https://facebook.github.io/react/)
 * [Redux](http://redux.js.org/)
 * [React Router](https://reacttraining.com/react-router/)
 * [Material UI](http://www.material-ui.com/#/)
+
+### Web Server
+
+* [Node.js](https://nodejs.org/en/)
+* [Express](https://expressjs.com/)
 
 ### Tools, Development, and Test
 
@@ -95,11 +100,6 @@ docker image rm reactuniversal_dev reactuniversal_web
 * [JSDOM](https://github.com/tmpvar/jsdom)
 * [React Hot Loader](http://gaearon.github.io/react-hot-loader/)
 * [nodemon](https://nodemon.io/)
-
-### Web Server
-
-* [Node.js](https://nodejs.org/en/)
-* [Express](https://expressjs.com/)
 
 ### Build and Bundling
 
