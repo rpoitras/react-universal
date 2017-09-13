@@ -21,3 +21,12 @@ services:
       - ./:/react-universal:rw
     ports:
       - "4000:4000"
+
+  wss:
+    build:
+      context: ./
+      dockerfile: /docker/Dockerfile-wss
+    volumes:
+      - ./:/react-universal:rw
+    ports:
+      - "3000:3000"

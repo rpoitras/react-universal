@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import RaisedButton from 'material-ui/RaisedButton'
 import Snackbar from 'material-ui/Snackbar'
 import TextField from 'material-ui/TextField'
+import projectConfig from 'project.config'
 import { orange500, blue500, red500, yellow500 } from 'material-ui/styles/colors'
 
 const styles = {
@@ -67,7 +68,7 @@ class WebSocketExample extends Component {
 
   wsConnect () {
     if (this.ws === null) {
-      this.ws = new WebSocket('ws://192.168.0.104:3000/react-universal')
+      this.ws = new WebSocket(`ws://localhost:${projectConfig.wsServerPort}/${projectConfig.wsDest}`)
       console.log('this.ws', this.ws)
       this.ws.addEventListener('open', this.wsOpenCallback)
       this.ws.addEventListener('message', this.wsMessageCallback)

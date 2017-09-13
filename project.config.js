@@ -22,5 +22,8 @@ module.exports = {
   },
 
   devServerPort: 4000,
-  prodServerPort: 4100
+  prodServerPort: 4100,
+  wsServerPort: 3000,
+
+  wsDest: 'messaging/echo'
 }
