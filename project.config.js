@@ -18,9 +18,13 @@ module.exports = {
     src: path.resolve(__dirname, 'app'),
     dist: path.resolve(__dirname, 'build'),
     assets: path.resolve(__dirname, 'app/assets'),
+    util: path.resolve(__dirname, 'app/util'),
     react: path.resolve(__dirname, 'node_modules/react')
   },
 
   devServerPort: 4000,
-  prodServerPort: 4100
+  prodServerPort: 4100,
+  wsServerPort: 3000,
+
+  wsDest: 'messaging/echo'
 }

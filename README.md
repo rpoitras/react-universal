@@ -40,20 +40,22 @@ as well as change detection on the Express server thanks to nodemon.
 
 To start:
 ```
-$ docker-compose up
+docker-compose up
 ```
 
 To force build and start:
 ```
-$ docker-compose up --build
+yarn build
+docker-compose up --build
 ```
 
 Check the status of the running containers:
 ```
 docker ps
 CONTAINER ID        IMAGE                COMMAND                CREATED             STATUS              PORTS                                                  NAMES
-ed2914f613b9        reactuniversal_dev   "npm run start:dev"    10 minutes ago      Up 10 minutes       0.0.0.0:4000->4000/tcp                                 reactuniversal_dev_1
-862f6dc7a839        reactuniversal_web   "/bin/sh -c 'nginx'"   10 minutes ago      Up 10 minutes       0.0.0.0:443->443/tcp, 80/tcp, 0.0.0.0:8090->8090/tcp   reactuniversal_web_1
+c38af3cf043f        reactuniversal_web   "/bin/sh -c 'nginx'"   6 minutes ago       Up 6 minutes        0.0.0.0:443->443/tcp, 80/tcp, 0.0.0.0:8090->8090/tcp   reactuniversal_web_1
+6530a13b95ca        reactuniversal_dev   "npm run start:dev"    6 minutes ago       Up 6 minutes        0.0.0.0:4000->4000/tcp                                 reactuniversal_dev_1
+7e362a3f300f        reactuniversal_wss   "npm run start:wss"    6 minutes ago       Up 6 minutes        0.0.0.0:3000->3000/tcp                                 reactuniversal_wss_1
 ```
 
 The following URLs are available on the browser:
@@ -64,17 +66,17 @@ The following URLs are available on the browser:
 
 Stop containers:
 ```
-docker stop reactuniversal_dev_1 reactuniversal_web_1
+docker stop reactuniversal_dev_1 reactuniversal_web_1 reactuniversal_wss_1
 ```
 
 Remove containers:
 ```
-docker container rm reactuniversal_dev_1 reactuniversal_web_1
+docker container rm reactuniversal_dev_1 reactuniversal_web_1 reactuniversal_wss_1
 ```
 
 Remove images:
 ```
-docker image rm reactuniversal_dev reactuniversal_web
+docker image rm reactuniversal_dev reactuniversal_web reactuniversal_wss
 ```
 ## Technology Stack
 
@@ -89,6 +91,7 @@ docker image rm reactuniversal_dev reactuniversal_web
 
 * [Node.js](https://nodejs.org/en/)
 * [Express](https://expressjs.com/)
+* [WebSocket](https://github.com/websockets/ws)
 
 ### Tools, Development, and Test
 

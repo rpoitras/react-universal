@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import RaisedButton from 'material-ui/RaisedButton'
 import Snackbar from 'material-ui/Snackbar'
 import TextField from 'material-ui/TextField'
+import { WS_DEST, WS_PORT } from 'util/constants'
 import { orange500, blue500, red500, yellow500 } from 'material-ui/styles/colors'
 
 const styles = {
@@ -24,9 +25,6 @@ const styles = {
   }
 }
 
-/**
- * TODO - split into presentation and container
- */
 class WebSocketExample extends Component {
   constructor () {
     super()
@@ -67,7 +65,7 @@ class WebSocketExample extends Component {
 
   wsConnect () {
     if (this.ws === null) {
-      this.ws = new WebSocket('ws://192.168.0.104:3000/react-universal')
+      this.ws = new WebSocket(`ws://localhost:${WS_PORT}/${WS_DEST}`)
       console.log('this.ws', this.ws)
       this.ws.addEventListener('open', this.wsOpenCallback)
       this.ws.addEventListener('message', this.wsMessageCallback)
@@ -132,7 +130,7 @@ class WebSocketExample extends Component {
   render () {
     return (
       <div className='column-container'>
-        <h2 id='ws_main_heading'>WebSocket Example</h2>
+        <h2 id='ws_main_heading'>WebSocket - Echo</h2>
         <br />
         <br />
         <div className='row-container'>
