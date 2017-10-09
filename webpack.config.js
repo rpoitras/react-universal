@@ -87,7 +87,7 @@ webpackConfig.module = {
 
       use: [
         {
-          loader: 'babel-loader?presets[]=react,presets[]=es2015,presets[]=stage-2'
+          loader: 'babel-loader?presets[]=react,presets[]=env,presets[]=stage-2'
         },
         {
           loader: 'eslint-loader'
