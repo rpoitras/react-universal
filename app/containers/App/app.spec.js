@@ -1,10 +1,13 @@
 import React from 'react'
-import { shallow } from 'enzyme'
+import Adapter from 'enzyme-adapter-react-16'
+import { configure, shallow } from 'enzyme'
 import { expect } from 'chai'
 import { describe, beforeEach } from 'mocha'
 import App from './app'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+
+configure({ adapter: new Adapter() })
 
 describe('<App />', () => {
   let component
