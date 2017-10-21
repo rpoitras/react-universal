@@ -3,7 +3,6 @@ import { shallow } from 'enzyme'
 import { expect } from 'chai'
 import { describe, beforeEach } from 'mocha'
 import NestedPartial from './'
-import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
 describe('<NestedPartial />', () => {
@@ -11,7 +10,7 @@ describe('<NestedPartial />', () => {
 
   beforeEach(() => {
     component = shallow(
-      <MuiThemeProvider muiTheme={getMuiTheme()}>
+      <MuiThemeProvider>
         <NestedPartial match={{}} />
       </MuiThemeProvider>
     )

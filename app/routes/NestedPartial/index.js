@@ -1,25 +1,56 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Link, Route, Switch } from 'react-router-dom'
-import FontIcon from 'material-ui/FontIcon'
-import { List, ListItem } from 'material-ui/List'
-import {red500, blue500} from 'material-ui/styles/colors'
+import { withStyles } from 'material-ui/styles'
+import classNames from 'classnames'
+import FlightTakeoffIcon from 'material-ui-icons/FlightTakeoff'
+import VideogameAssetIcon from 'material-ui-icons/VideogameAsset'
+import List, { ListItem, ListItemIcon, ListItemText } from 'material-ui/List'
+import Typography from 'material-ui/Typography'
+import blue from 'material-ui/colors/blue'
+import green from 'material-ui/colors/green'
+import red from 'material-ui/colors/red'
 import SubrouteA from './components/SubrouteA'
 import SubrouteB from './components/SubrouteB'
 import NotFound from '../NotFound'
 
-const styles = {
+const styles = theme => ({
   iconStyles: {
     marginRight: '24px'
   },
   container: {
-    flexGrow: 1
+    display: 'flex',
+    flexGrow: 1,
+    alignItems: 'center'
+  },
+  icon: {
+    margin: theme.spacing.unit
+  },
+  iconBlue: {
+    fill: blue[500]
+  },
+  iconRed: {
+    fill: red[500]
+  },
+  iconHover: {
+    fill: red[500],
+    '&:hover': {
+      fill: green[200]
+    }
   }
+})
+
+const typographyStyle = {
+  width: '100%',
+  maxWidth: 500,
+  marginTop: '100px',
+  align: 'center'
 }
 
 class NestedPartial extends Component {
   static propTypes = {
-    match: PropTypes.object.isRequired
+    match: PropTypes.object.isRequired,
+    classes: PropTypes.object.isRequired
   }
 
   renderRoute (url, isExact) {
@@ -37,37 +68,35 @@ class NestedPartial extends Component {
 
   render () {
     const { url, isExact } = this.props.match
+    const { classes } = this.props
     return (
-      <div style={styles.container} className='column-container'>
-        <h2>Route With Sub-Routes</h2>
-        <h3>Sub-route is rendered as a Partial on the same page as the Parent</h3>
-        <List>
-          <ListItem
-            primaryText='Sub-route A'
-            leftIcon={
-              <FontIcon
-                className='material-icons'
-                style={styles.iconStyles} color={red500}>flight_takeoff
-              </FontIcon>
-            }
-            containerElement={<Link to={`${url}/A`} />}
-          />
-          <ListItem
-            primaryText='Sub-route B'
-            leftIcon={
-              <FontIcon
-                className='material-icons'
-                style={styles.iconStyles}
-                color={blue500}>videogame_asset
-              </FontIcon>
-            }
-            containerElement={<Link to={`${url}/B`} />}
-          />
-        </List>
-        {this.renderRoute(url, isExact)}
+      <div className={[classes.container, 'column-container']}>
+        <div style={typographyStyle} className='column-container'>
+          <Typography type='title' gutterBottom align='center'>
+          Route With Sub-Routes
+          </Typography>
+          <Typography type='subheading' gutterBottom align='center'>
+          Sub-route is rendered as a Partial on the same page as the Parent
+          </Typography>
+          <List>
+            <ListItem component={Link} to={`${url}/A`}>
+              <ListItemIcon className={classNames(classes.icon, classes.iconBlue)}>
+                <FlightTakeoffIcon />
+              </ListItemIcon>
+              <ListItemText primary='Sub-route A' />
+            </ListItem>
+            <ListItem component={Link} to={`${url}/B`}>
+              <ListItemIcon className={classNames(classes.icon, classes.iconRed)}>
+                <VideogameAssetIcon />
+              </ListItemIcon>
+              <ListItemText primary='Sub-route B' />
+            </ListItem>
+          </List>
+          {this.renderRoute(url, isExact)}
+        </div>
       </div>
     )
   }
 }
 
-export default NestedPartial
+export default withStyles(styles)(NestedPartial)

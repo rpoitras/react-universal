@@ -3,7 +3,6 @@ import { shallow } from 'enzyme'
 import { expect } from 'chai'
 import { describe, beforeEach } from 'mocha'
 import About from './'
-import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
 describe('<About />', () => {
@@ -11,7 +10,7 @@ describe('<About />', () => {
 
   beforeEach(() => {
     component = shallow(
-      <MuiThemeProvider muiTheme={getMuiTheme()}>
+      <MuiThemeProvider>
         <About />
       </MuiThemeProvider>
     )

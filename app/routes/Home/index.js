@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
-import RaisedButton from 'material-ui/RaisedButton'
+import PropTypes from 'prop-types'
+import { withStyles } from 'material-ui/styles'
 import reactLogo from 'assets/react.svg'
 import dockerLogo from 'assets/dockerwhalehero.jpg'
 import nginxLogo from 'assets/nginx_logo.png'
 import './home.css'
 
-const styles = {
+const styles = theme => ({
   container: {
     flexGrow: 1
   },
@@ -23,13 +23,18 @@ const styles = {
   nginxImg: {
     width: '160px',
     height: '160px',
-    padding: '20px 10px 66px 50px'
+    padding: '20px 10px 66px 0'
+  },
+  input: {
+    display: 'none'
   }
-}
+})
+
 class Home extends Component {
   render () {
+    const { classes } = this.props
     return (
-      <div style={styles.container}>
+      <div className={classes.container}>
         <div className='column-container'>
           <h1>React Universal App</h1>
           <div>
@@ -38,33 +43,24 @@ class Home extends Component {
                 <img
                   src={nginxLogo}
                   alt='nginx'
-                  style={styles.nginxImg}
+                  className={classes.nginxImg}
                 />
               </a>
               <a href='https://facebook.github.io/react/' target='_blank'>
                 <img
-                  className='react-logo'
                   src={reactLogo}
                   alt='React'
-                  style={styles.reactImg}
+                  className={classes.reactImg}
                 />
               </a>
               <a href='https://www.docker.com/community-edition' target='_blank'>
                 <img
                   src={dockerLogo}
                   alt='Docker'
-                  style={styles.dockerImg}
+                  className={classes.dockerImg}
                 />
               </a>
             </span>
-          </div>
-          <br />
-          <div className='row-container'>
-            <Link to='/about'>
-              <RaisedButton
-                id='home-aboutButton'
-                label='About' />
-            </Link>
           </div>
         </div>
       </div>
@@ -72,4 +68,8 @@ class Home extends Component {
   }
 }
 
-export default Home
+Home.propTypes = {
+  classes: PropTypes.object.isRequired
+}
+
+export default withStyles(styles)(Home)

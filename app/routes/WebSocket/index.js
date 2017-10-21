@@ -1,29 +1,28 @@
 import React, { Component } from 'react'
-import RaisedButton from 'material-ui/RaisedButton'
+import PropTypes from 'prop-types'
+import { withStyles } from 'material-ui/styles'
+import Button from 'material-ui/Button'
 import Snackbar from 'material-ui/Snackbar'
 import TextField from 'material-ui/TextField'
 import { WS_DEST, WS_PORT } from 'util/constants'
-import { orange500, blue500, red500, yellow500 } from 'material-ui/styles/colors'
 
-const styles = {
-  wsButton: {
-    margin: '10px'
+const styles = theme => ({
+  container: {
+    display: 'flex',
+    flexWrap: 'wrap'
   },
-  wsInputField: {
-    floatingLabelText: {
-      color: yellow500
-    },
-    floatingLabelStyle: {
-      color: orange500
-    },
-    floatingLabelFocusStyle: {
-      color: blue500
-    },
-    underlineStyle: {
-      borderColor: red500
-    }
+  textField: {
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit,
+    width: 200
+  },
+  button: {
+    margin: theme.spacing.unit
+  },
+  input: {
+    display: 'none'
   }
-}
+})
 
 class WebSocketExample extends Component {
   constructor () {
@@ -37,6 +36,7 @@ class WebSocketExample extends Component {
     }
     this.snackbarMsg = ''
     this.ws = null
+    this.refreshTime = Date.now()
 
     // HMR and fat arrow functions does not work. Alternative is to avoid them, but you have to bind this as needed.
     // https://github.com/gaearon/react-hot-loader/issues/221
@@ -65,6 +65,7 @@ class WebSocketExample extends Component {
 
   wsConnect () {
     if (this.ws === null) {
+      // this.ws = new WebSocket(`wss://localhost:${WS_PORT}/${WS_DEST}`)
       this.ws = new WebSocket(`ws://localhost:${WS_PORT}/${WS_DEST}`)
       console.log('this.ws', this.ws)
       this.ws.addEventListener('open', this.wsOpenCallback)
@@ -127,44 +128,50 @@ class WebSocketExample extends Component {
     }
   }
 
+  shouldComponentUpdate (nextProps, nextState) {
+    let oldTime = this.refreshTime
+    this.refreshTime = Date.now()
+    let diff = this.refreshTime - oldTime
+    console.log(`Last refresh was ${diff} milliseconds ago`)
+    return true
+  }
+
   render () {
+    const { classes } = this.props
     return (
       <div className='column-container'>
         <h2 id='ws_main_heading'>WebSocket - Echo</h2>
         <br />
         <br />
         <div className='row-container'>
-          <RaisedButton
-            style={styles.wsButton}
+          <Button raised
+            className={classes.button}
             id='ws_connect'
             disabled={this.state.connectDisabled}
-            label='Connect'
-            onMouseDown={this.wsConnect}
-          />
-          <RaisedButton
-            style={styles.wsButton}
+            onTouchTap={this.wsConnect}>Connect
+          </Button>
+          <Button raised
+            className={classes.button}
             id='ws_disconnect'
             disabled={this.state.disconnectDisabled}
-            label='Disconnect'
-            onMouseDown={this.wsDisconnect}
-          />
-          <RaisedButton
-            style={styles.wsButton}
+            onMouseDown={this.wsDisconnect}>Disconnect
+          </Button>
+          <Button raised
+            className={classes.button}
             id='ws_send'
             disabled={this.state.sendDisabled}
-            label='Send'
-            onMouseDown={this.wsSendMessage}
-          />
+            onMouseDown={this.wsSendMessage}>Send
+          </Button>
         </div>
         <br />
         <TextField
-          style={styles.wsInputField}
+          className={classes.textField}
           id='ws_input_field'
           disabled={this.state.inputDisabled}
           onChange={this.handleInputTextChange}
           onKeyPress={this.handleTextKeyPress}
-          hintText='enter text'
-          floatingLabelText='Send to Server'
+          label='Send to Server'
+          margin='normal'
         />
         <Snackbar
           open={this.state.snackbarOpen}
@@ -177,4 +184,8 @@ class WebSocketExample extends Component {
   }
 }
 
-export default WebSocketExample
+WebSocketExample.propTypes = {
+  classes: PropTypes.object.isRequired
+}
+
+export default withStyles(styles)(WebSocketExample)

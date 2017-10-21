@@ -1,8 +1,20 @@
 'use strict'
 
+// const https = require('https')
+// const fs = require('fs')
 const url = require('url')
 const WebSocket = require('ws')
 const projectConfig = require('../project.config')
+
+// const server = https.createServer({
+//   cert: fs.readFileSync(`${process.cwd()}/conf/server.crt`),
+//   key: fs.readFileSync(`${process.cwd()}/conf/server.key`)
+// })
+//
+// const wss = new WebSocket.Server({
+//   server: server,
+//   port: projectConfig.wsServerPort
+// })
 
 const wss = new WebSocket.Server({ port: projectConfig.wsServerPort })
 

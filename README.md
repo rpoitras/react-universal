@@ -20,6 +20,7 @@ yarn install
 
 ### Run development build with hot module replacement:
 ```
+yarn run build:dev
 yarn start
 ```
 run with http://localhost:4000/react-universal
