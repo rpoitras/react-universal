@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { withStyles } from 'material-ui/styles'
+import classNames from 'classnames'
 import reactLogo from 'assets/react.svg'
 import dockerLogo from 'assets/dockerwhalehero.jpg'
 import nginxLogo from 'assets/nginx_logo.png'
@@ -34,34 +35,32 @@ class Home extends Component {
   render () {
     const { classes } = this.props
     return (
-      <div className={classes.container}>
-        <div className='column-container'>
-          <h1>React Universal App</h1>
-          <div>
-            <span>
-              <a href='https://www.nginx.com/resources/wiki/' target='_blank'>
-                <img
-                  src={nginxLogo}
-                  alt='nginx'
-                  className={classes.nginxImg}
-                />
-              </a>
-              <a href='https://facebook.github.io/react/' target='_blank'>
-                <img
-                  src={reactLogo}
-                  alt='React'
-                  className={classes.reactImg}
-                />
-              </a>
-              <a href='https://www.docker.com/community-edition' target='_blank'>
-                <img
-                  src={dockerLogo}
-                  alt='Docker'
-                  className={classes.dockerImg}
-                />
-              </a>
-            </span>
-          </div>
+      <div className={classNames(classes.container, 'column-container')}>
+        <h1>React Universal App</h1>
+        <div>
+          <span>
+            <a href='https://www.nginx.com/resources/wiki/' target='_blank'>
+              <img
+                src={nginxLogo}
+                alt='nginx'
+                className={classes.nginxImg}
+              />
+            </a>
+            <a href='https://facebook.github.io/react/' target='_blank'>
+              <img
+                src={reactLogo}
+                alt='React'
+                className={classes.reactImg}
+              />
+            </a>
+            <a href='https://www.docker.com/community-edition' target='_blank'>
+              <img
+                src={dockerLogo}
+                alt='Docker'
+                className={classes.dockerImg}
+              />
+            </a>
+          </span>
         </div>
       </div>
     )

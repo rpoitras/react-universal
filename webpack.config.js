@@ -67,7 +67,8 @@ webpackConfig.resolve = {
   alias: {
     assets: project.paths.assets,
     react: project.paths.react,
-    util: project.paths.util
+    util: project.paths.util,
+    styles: project.paths.styles
   },
   extensions: ['.js', '.jsx']
 }

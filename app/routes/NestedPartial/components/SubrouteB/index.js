@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import Typography from 'material-ui/Typography'
+import typographyStyle from 'styles/typography-style'
 import NotFound from '../../../NotFound'
 
 const styles = {
@@ -17,10 +19,11 @@ class SubrouteB extends Component {
     const { isExact } = this.props.match
     if (isExact) {
       return (
-        <div style={styles.container}>
-          <div className='column-container'>
-            <h3>Page B</h3>
-          </div>
+        <div style={[styles.container, typographyStyle]} className='column-container'>
+          <br />
+          <Typography type='title' gutterBottom align='center'>
+            Page B
+          </Typography>
         </div>
       )
     } else {

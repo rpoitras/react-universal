@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { withStyles } from 'material-ui/styles'
+import Typography from 'material-ui/Typography'
+import typographyStyle from 'styles/typography-style'
 import Button from 'material-ui/Button'
 import Snackbar from 'material-ui/Snackbar'
 import TextField from 'material-ui/TextField'
@@ -9,7 +11,8 @@ import { WS_DEST, WS_PORT } from 'util/constants'
 const styles = theme => ({
   container: {
     display: 'flex',
-    flexWrap: 'wrap'
+    flexGrow: 1,
+    alignItems: 'center'
   },
   textField: {
     marginLeft: theme.spacing.unit,
@@ -139,8 +142,10 @@ class WebSocketExample extends Component {
   render () {
     const { classes } = this.props
     return (
-      <div className='column-container'>
-        <h2 id='ws_main_heading'>WebSocket - Echo</h2>
+      <div style={typographyStyle} className='column-container'>
+        <Typography type='title' gutterBottom align='center'>
+          WebSocket - Echo
+        </Typography>
         <br />
         <br />
         <div className='row-container'>

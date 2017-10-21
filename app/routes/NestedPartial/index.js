@@ -5,8 +5,10 @@ import { withStyles } from 'material-ui/styles'
 import classNames from 'classnames'
 import FlightTakeoffIcon from 'material-ui-icons/FlightTakeoff'
 import VideogameAssetIcon from 'material-ui-icons/VideogameAsset'
+import Divider from 'material-ui/Divider'
 import List, { ListItem, ListItemIcon, ListItemText } from 'material-ui/List'
 import Typography from 'material-ui/Typography'
+import typographyStyle from 'styles/typography-style'
 import blue from 'material-ui/colors/blue'
 import green from 'material-ui/colors/green'
 import red from 'material-ui/colors/red'
@@ -40,13 +42,6 @@ const styles = theme => ({
   }
 })
 
-const typographyStyle = {
-  width: '100%',
-  maxWidth: 500,
-  marginTop: '100px',
-  align: 'center'
-}
-
 class NestedPartial extends Component {
   static propTypes = {
     match: PropTypes.object.isRequired,
@@ -78,19 +73,23 @@ class NestedPartial extends Component {
           <Typography type='subheading' gutterBottom align='center'>
           Sub-route is rendered as a Partial on the same page as the Parent
           </Typography>
+          <br />
           <List>
+            <Divider />
             <ListItem component={Link} to={`${url}/A`}>
               <ListItemIcon className={classNames(classes.icon, classes.iconBlue)}>
                 <FlightTakeoffIcon />
               </ListItemIcon>
               <ListItemText primary='Sub-route A' />
             </ListItem>
+            <Divider />
             <ListItem component={Link} to={`${url}/B`}>
               <ListItemIcon className={classNames(classes.icon, classes.iconRed)}>
                 <VideogameAssetIcon />
               </ListItemIcon>
               <ListItemText primary='Sub-route B' />
             </ListItem>
+            <Divider />
           </List>
           {this.renderRoute(url, isExact)}
         </div>

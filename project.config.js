@@ -19,7 +19,8 @@ module.exports = {
     dist: path.resolve(__dirname, 'build'),
     assets: path.resolve(__dirname, 'app/assets'),
     util: path.resolve(__dirname, 'app/util'),
-    react: path.resolve(__dirname, 'node_modules/react')
+    react: path.resolve(__dirname, 'node_modules/react'),
+    styles: path.resolve(__dirname, 'app/styles')
   },
 
   devServerPort: 4000,
