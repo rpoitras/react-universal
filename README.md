@@ -2,7 +2,7 @@
 
 The project started as a place to move a backend web server from Tomcat to nginx.
 In the process other dominoes fell, Spring Web MVC and SpringBoot which were replaced
-by Node.js and Express. I also wanted to use Docker and eventually move to a 
+by Node.js and Express. I also wanted to use Docker and eventually move to a
 microservice architecture.
 
 ## Quick Start
@@ -28,6 +28,7 @@ run with http://localhost:4000/react-universal
 ```
 yarn run start:prod
 ```
+run with http://localhost:4100/react-universal
 
 ### Using Docker Compose
 Requires [Docker Compose](https://docs.docker.com/compose/)
