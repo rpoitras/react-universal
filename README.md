@@ -25,6 +25,12 @@ yarn start
 ```
 run with http://localhost:4000/react-universal
 
+### WebSocket Server
+In a new terminal, at the project root, start the WebSocket server.
+```
+yarn run start:wss
+```
+
 ### Run production:
 ```
 yarn run start:prod
