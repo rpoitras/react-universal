@@ -10,9 +10,6 @@ const project = require('./project.config')
 const __DEV__ = project.env === 'development'
 const __PROD__ = project.env === 'production'
 
-// host address
-const HOST = 'localhost'
-
 // Enable production source maps
 const ENABLE_PROD_SRC_MAPS = false
 
@@ -55,7 +52,7 @@ webpackConfig.output = {
 if (__DEV__) {
   webpackConfig.output.filename = '[name].js'
   webpackConfig.output.chunkFilename = '[id].js'
-  webpackConfig.output.publicPath = `http://${HOST}:${project.devServerPort}/${project.basename}/`
+  webpackConfig.output.publicPath = `http://${project.host}:${project.devServerPort}/${project.basename}/`
 } else {
   webpackConfig.output.filename = '[name].[hash].js'
   webpackConfig.output.chunkFilename = '[id].[chunkhash].js'

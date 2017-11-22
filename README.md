@@ -32,6 +32,7 @@ yarn run start:wss
 
 ### Run production:
 ```
+yarn build
 yarn run start:prod
 ```
 run with http://localhost:4100/react-universal
