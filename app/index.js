@@ -6,7 +6,7 @@ import injectTapEventPlugin from 'react-tap-event-plugin'
 import { AppContainer } from 'react-hot-loader'
 
 import store, { history } from './store'
-import Root from './containers/Root'
+import Root from './components/Root'
 
 import '../style/common.css'
 
@@ -25,8 +25,8 @@ function renderApp (RootComponent) {
 renderApp(Root)
 
 if (module.hot) {
-  module.hot.accept('./containers/Root', () => {
-    const NextApp = require('./containers/Root').default
+  module.hot.accept('./components/Root', () => {
+    const NextApp = require('./components/Root').default
     renderApp(NextApp)
   })
 }
