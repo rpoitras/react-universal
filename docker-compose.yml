@@ -1,6 +1,8 @@
 version: '3'
+
 services:
   web:
+    container_name: "react-universal-web"
     build:
       context: ./
       dockerfile: /docker/Dockerfile-prod
@@ -13,7 +15,13 @@ services:
     ports:
       - "8090:8090"
       - "443:443"
+    links:
+      - mongodb
+    depends_on:
+      - mongodb
+
   dev:
+    container_name: "react-universal-dev"
     build:
       context: ./
       dockerfile: /docker/Dockerfile-dev
@@ -23,6 +31,7 @@ services:
       - "4000:4000"
 
   wss:
+    container_name: "react-universal-wss"
     build:
       context: ./
       dockerfile: /docker/Dockerfile-wss
@@ -30,3 +39,15 @@ services:
       - ./:/react-universal:rw
     ports:
       - "3000:3000"
+
+  mongodb:
+      image: mongo:latest
+      container_name: "react-universal-mongodb"
+      environment:
+        - MONGO_DATA_DIR=/data/db
+        - MONGO_LOG_DIR=/dev/null
+      volumes:
+        - ./data/db:/data/db
+      ports:
+          - 27017:27017
+      command: mongod --smallfiles --logpath=/dev/null # --quiet
