@@ -13,6 +13,20 @@ microservice architecture.
 * [nodemon](https://nodemon.io/) - optional, replace `nodemon` with `node` in `package.json` to skip server monitoring
 * [docker](https://www.docker.com/) - optional
 
+### Mongo DB and REST
+Both of these services (Docker containers) require a `.env` file in the project root folder with these contents:
+```
+MONGODB_EXPOSED_PORT=27017
+MONGODB_ADMIN_USER=admin
+MONGODB_ADMIN_PASS=adminP4ss
+MONGODB_APPLICATION_DATABASE=appdb
+MONGODB_APPLICATION_USER=appuser
+MONGODB_APPLICATION_PASS=appP4ss
+REST_API_EXPOSED_PORT=3000
+REST_API_APIKEY=ifna212ASFisfsjaAFFF
+```
+[More described here.](http://blog.bejanalex.com/2017/03/mongodb-rest-api-interface-in-docker/)
+
 ### Install dependencies:
 ```
 yarn install
@@ -59,11 +73,13 @@ docker-compose up --build
 
 Check the status of the running containers:
 ```
-docker ps
-CONTAINER ID        IMAGE                COMMAND                CREATED             STATUS              PORTS                                                  NAMES
-c38af3cf043f        reactuniversal_web   "/bin/sh -c 'nginx'"   6 minutes ago       Up 6 minutes        0.0.0.0:443->443/tcp, 80/tcp, 0.0.0.0:8090->8090/tcp   reactuniversal_web_1
-6530a13b95ca        reactuniversal_dev   "npm run start:dev"    6 minutes ago       Up 6 minutes        0.0.0.0:4000->4000/tcp                                 reactuniversal_dev_1
-7e362a3f300f        reactuniversal_wss   "npm run start:wss"    6 minutes ago       Up 6 minutes        0.0.0.0:3000->3000/tcp                                 reactuniversal_wss_1
+rp-iMac:react-universal robpoitras$ docker ps
+CONTAINER ID        IMAGE                  COMMAND                  CREATED              STATUS              PORTS                                                  NAMES
+7d06b941811a        reactuniversal_web     "/bin/sh -c 'nginx'"     About a minute ago   Up About a minute   0.0.0.0:443->443/tcp, 80/tcp, 0.0.0.0:8090->8090/tcp   react-universal-web
+f72f2fd4f616        reactuniversal_dev     "npm run start:dev"      About a minute ago   Up About a minute   0.0.0.0:4000->4000/tcp                                 react-universal-dev
+b77ec8c1be4c        reactuniversal_wss     "npm run start:wss"      About a minute ago   Up About a minute   0.0.0.0:3100->3100/tcp                                 react-universal-wss
+cd597510e59b        linuxenko/mongo-rest   "node index.js"          5 hours ago          Up About a minute   0.0.0.0:3000->3000/tcp                                 restapi_container
+35624b213006        alexpunct/mongo:3.4    "/entrypoint.sh /r..."   5 hours ago          Up About a minute   0.0.0.0:27017->27017/tcp                               35624b213006_react-universal-mongodb
 ```
 
 The following URLs are available on the browser:
@@ -74,12 +90,12 @@ The following URLs are available on the browser:
 
 Stop containers:
 ```
-docker stop reactuniversal_dev_1 reactuniversal_web_1 reactuniversal_wss_1
+docker-compose stop
 ```
 
 Remove containers:
 ```
-docker container rm reactuniversal_dev_1 reactuniversal_web_1 reactuniversal_wss_1
+docker container rm react-universal-dev react-universal-web react-universal-wss react-universal-mongodb restapi_container
 ```
 
 Remove images:
@@ -100,6 +116,20 @@ docker image rm reactuniversal_dev reactuniversal_web reactuniversal_wss
 * [Node.js](https://nodejs.org/en/)
 * [Express](https://expressjs.com/)
 * [WebSocket](https://github.com/websockets/ws)
+
+### Database
+
+* [mongoDB](https://www.mongodb.com/)
+* [mongoose](http://mongoosejs.com/)
+* [Robo 3T - formerly Robomongo](https://robomongo.org/)
+* [Alex's Blog](http://blog.bejanalex.com/2017/03/mongodb-rest-api-interface-in-docker/)
+
+### Security
+
+* [5 Steps to Authenticating Node.js with JWT](https://www.codementor.io/olatundegaruba/5-steps-to-authenticating-node-js-with-jwt-7ahb5dmyr)
+* [JSON Web Tokens](https://github.com/auth0/node-jsonwebtoken)
+* [Bcrypt](https://github.com/kelektiv/node.bcrypt.js)
+* [MongoDB in Docker with Auth](http://blog.bejanalex.com/2017/03/running-mongodb-in-a-docker-container-with-authentication/)
 
 ### Tools, Development, and Test
 

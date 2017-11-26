@@ -9,3 +9,5 @@ npm-debug.log
 *.ipr
 *.iws
 .idea
+
+.env

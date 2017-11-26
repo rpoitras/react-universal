@@ -1,6 +1,14 @@
 version: '3'
 
+# Data volume for Mongo
+volumes:
+  mongostorage:
+
 services:
+
+  #
+  # Web container
+  #
   web:
     container_name: "react-universal-web"
     build:
@@ -17,9 +25,14 @@ services:
       - "443:443"
     links:
       - mongodb
+      - restapi
     depends_on:
       - mongodb
+      - restapi
 
+  #
+  # Development server with HMR
+  #
   dev:
     container_name: "react-universal-dev"
     build:
@@ -30,6 +43,9 @@ services:
     ports:
       - "4000:4000"
 
+  #
+  # WebSocket server
+  #
   wss:
     container_name: "react-universal-wss"
     build:
@@ -38,16 +54,50 @@ services:
     volumes:
       - ./:/react-universal:rw
     ports:
-      - "3000:3000"
+      - "3100:3100"
 
+  #
+  # Mongo Database
+  #
   mongodb:
-      image: mongo:latest
-      container_name: "react-universal-mongodb"
-      environment:
-        - MONGO_DATA_DIR=/data/db
-        - MONGO_LOG_DIR=/dev/null
-      volumes:
-        - ./data/db:/data/db
-      ports:
-          - 27017:27017
-      command: mongod --smallfiles --logpath=/dev/null # --quiet
+    image: mongo:latest
+    container_name: "react-universal-mongodb"
+    # https://hub.docker.com/r/alexpunct/mongo/
+    image: alexpunct/mongo:3.4
+    # We use mongostorage data volume and we will use the /data/db path for the database inside the container
+    volumes:
+      - mongostorage:/data/db
+    # Expose a MongoDB port to connect to, defined by the MONGODB_EXPOSED_PORT environment variable
+    # and map this port to the 27017 internal port which is what MongoDB uses
+    ports:
+      - "${MONGODB_EXPOSED_PORT}:27017"
+    # Passing environment variables from the host to the container.
+    # Our container expects the following variables (as explained here: https://hub.docker.com/r/alexpunct/mongo/)
+    environment:
+      MONGODB_ADMIN_USER: $MONGODB_ADMIN_USER
+      MONGODB_ADMIN_PASS: $MONGODB_ADMIN_PASS
+      MONGODB_APPLICATION_DATABASE: $MONGODB_APPLICATION_DATABASE
+      MONGODB_APPLICATION_USER: $MONGODB_APPLICATION_USER
+      MONGODB_APPLICATION_PASS: $MONGODB_APPLICATION_PASS
+
+  #
+  # REST API service
+  #
+  restapi:
+    # Give it a name
+    container_name: restapi_container
+    # https://hub.docker.com/r/linuxenko/mongo-rest/
+    image: linuxenko/mongo-rest
+    # The port that our API will have exposed so we can connect to
+    ports:
+      - "${REST_API_EXPOSED_PORT}:3000"
+    # This field creates a hosts file entry in our container that points to the mongodb service
+    # so we can access it with the hostname mongo as in http://mongo:3000 from this container.
+    # It also tells the mongodb service to allow our service to connect to it (if we hand't have exposed a port already)
+    # Ultimately, it makes sure that mongodb starts before our restaapi service
+    links:
+      - mongodb:mongo
+    # Environment variables passed to the container.
+    environment:
+      ME_CONFIG_APIKEY: $REST_API_APIKEY
+      ME_CONFIG_DBSTRING: "mongodb://${MONGODB_APPLICATION_USER}:${MONGODB_APPLICATION_PASS}@mongo:27017/${MONGODB_APPLICATION_DATABASE}"
