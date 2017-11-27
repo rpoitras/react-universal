@@ -122,7 +122,9 @@ docker image rm reactuniversal_dev reactuniversal_web reactuniversal_wss
 * [mongoDB](https://www.mongodb.com/)
 * [mongoose](http://mongoosejs.com/)
 * [Robo 3T - formerly Robomongo](https://robomongo.org/)
-* [Alex's Blog](http://blog.bejanalex.com/2017/03/mongodb-rest-api-interface-in-docker/)
+* [MongoDB with Authentication](http://blog.bejanalex.com/2017/03/running-mongodb-in-a-docker-container-with-authentication/)
+* [MongoDB REST API](http://blog.bejanalex.com/2017/03/mongodb-rest-api-interface-in-docker/)
+* [Mongo REST](https://hub.docker.com/r/linuxenko/mongo-rest/)
 
 ### Security
 
