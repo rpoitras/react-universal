@@ -112,6 +112,9 @@ class App extends Component {
               <MenuItem
                 onTouchTap={this.handleRequestChange}
                 containerElement={<Link to='/websocket' />}>WebSocket</MenuItem>
+              <MenuItem
+                onTouchTap={this.handleRequestChange}
+                containerElement={<Link to='/user' />}>User</MenuItem>
               <Divider />
               <MenuItem
                 onTouchTap={this.handleRequestChange}
