@@ -86,7 +86,7 @@ class App extends Component {
           <AppBar
             id='app-bar'
             title={<div style={this.getLogoStyle()} />}
-            onLeftIconButtonTouchTap={this.handleHamburgerToggle}
+            onLeftIconButtonClick={this.handleHamburgerToggle}
             iconElementRight={
               <IconMenu
                 iconButtonElement={
