@@ -138,6 +138,10 @@ webpackConfig.plugins = [
     }
   }),
 
+  new webpack.ProvidePlugin({
+    'fetch': 'imports-loader?this=>global!exports-loader?global.fetch!whatwg-fetch'
+  }),
+
   new CompressionPlugin({
     asset: '[path].gz[query]',
     algorithm: 'gzip',

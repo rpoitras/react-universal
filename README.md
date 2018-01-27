@@ -11,7 +11,7 @@ microservice architecture.
 * [yarn](https://yarnpkg.com/en/)
 * [node](https://nodejs.org/en/)
 * [nodemon](https://nodemon.io/) - optional, replace `nodemon` with `node` in `package.json` to skip server monitoring
-* [docker](https://www.docker.com/) - optional
+* [docker](https://www.docker.com/) - optional, required for Mongo (User management)
 
 ### Mongo DB and REST
 Both of these services (Docker containers) require a `.env` file in the project root folder with these contents:

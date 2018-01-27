@@ -3,6 +3,7 @@ import { composeWithDevTools } from 'redux-devtools-extension/logOnlyInProductio
 import { routerMiddleware } from 'react-router-redux'
 import createBrowserHistory from 'history/createBrowserHistory'
 import rootReducer, { getDefaultInitialState } from './reducers'
+import Async from './middlewares/async'
 
 // Initial Redux Store state is pulled from each reducer's initial state definition.
 const initialState = getDefaultInitialState()
@@ -13,7 +14,7 @@ const historyRouterMiddleware = routerMiddleware(history)
 
 // Build up the store
 const store = createStore(rootReducer, initialState, composeWithDevTools(
-  applyMiddleware(historyRouterMiddleware)
+  applyMiddleware(Async, historyRouterMiddleware)
 ))
 
 if (module.hot) {

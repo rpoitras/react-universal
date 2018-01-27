@@ -4,6 +4,7 @@
     "compression": "1.7.1",
     "express": "4.16.2",
     "history": "4.7.2",
+    "immutable": "^3.8.2",
     "ip": "1.1.5",
     "jsonwebtoken": "8.1.1",
     "material-ui": "0.20.0",
@@ -17,6 +18,7 @@
     "react-tap-event-plugin": "3.0.2",
     "redux": "3.7.2",
     "redux-devtools-extension": "2.13.2",
+    "whatwg-fetch": "^2.0.3",
     "ws": "4.0.0"
   },
   "devDependencies": {
