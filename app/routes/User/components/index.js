@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import AddSvgIcon from 'material-ui/svg-icons/content/add-circle-outline'
+import { red500, green500 } from 'material-ui/styles/colors'
+import RemoveSvgIcon from 'material-ui/svg-icons/content/remove-circle-outline'
 import {
   Table,
   TableBody,
@@ -8,6 +11,15 @@ import {
   TableRow,
   TableRowColumn
 } from 'material-ui/Table'
+// import {
+//   Toolbar,
+//   ToolbarGroup,
+//   ToolbarTitle
+// } from 'material-ui/Toolbar'
+
+const iconStyles = {
+  marginRight: 12
+}
 
 class User extends Component {
   static propTypes = {
@@ -31,6 +43,16 @@ class User extends Component {
     this.setState({
       selected: selectedRows
     })
+  }
+
+  anyRowsSelected = () => {
+    return this.state.selected.length > 0
+  }
+
+  setRemoveIconColor = () => {
+    if (this.anyRowsSelected()) {
+      return {red500}
+    }
   }
 
   componentDidMount () {
@@ -81,8 +103,12 @@ class User extends Component {
   render () {
     const { users } = this.props
     return (
-      <div className='column-container'>
-        <h1>Users</h1>
+      <div>
+        <h1 align='center'>Users</h1>
+        <div align='right'>
+          <AddSvgIcon style={iconStyles} color={green500} />
+          <RemoveSvgIcon style={iconStyles} color={red500} />
+        </div>
         {this.renderTable(users)}
       </div>
     )
