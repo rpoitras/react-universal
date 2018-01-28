@@ -1,24 +1,22 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import AddSvgIcon from 'material-ui/svg-icons/content/add-circle-outline'
-import { red500, green500 } from 'material-ui/styles/colors'
+import { red500, redA100, green500, greenA700 } from 'material-ui/styles/colors'
 import RemoveSvgIcon from 'material-ui/svg-icons/content/remove-circle-outline'
 import {
-  Table,
-  TableBody,
-  TableHeader,
-  TableHeaderColumn,
-  TableRow,
-  TableRowColumn
-} from 'material-ui/Table'
-// import {
-//   Toolbar,
-//   ToolbarGroup,
-//   ToolbarTitle
-// } from 'material-ui/Toolbar'
+  Toolbar,
+  ToolbarGroup,
+  ToolbarTitle
+} from 'material-ui/Toolbar'
+import UserList from './user-list'
 
-const iconStyles = {
-  marginRight: 12
+const styles = {
+  toolIcon: {
+    marginRight: 10
+  },
+  toolTitle: {
+    marginLeft: 24
+  }
 }
 
 class User extends Component {
@@ -27,32 +25,20 @@ class User extends Component {
     actions: PropTypes.object.isRequired
   }
 
-  constructor (props) {
-    super(props)
+  // constructor (props) {
+  //   super(props)
+  //
+  //   this.state = {
+  //     selected: [1]
+  //   }
+  // }
 
-    this.state = {
-      selected: [1]
-    }
+  handleAddUser = () => {
+    console.log('Add user clicked!')
   }
 
-  isSelected = (index) => {
-    return this.state.selected.indexOf(index) !== -1
-  }
-
-  handleRowSelection = (selectedRows) => {
-    this.setState({
-      selected: selectedRows
-    })
-  }
-
-  anyRowsSelected = () => {
-    return this.state.selected.length > 0
-  }
-
-  setRemoveIconColor = () => {
-    if (this.anyRowsSelected()) {
-      return {red500}
-    }
+  handleRemoveUsers = () => {
+    console.log('Remove users? ', this.selected)
   }
 
   componentDidMount () {
@@ -64,52 +50,30 @@ class User extends Component {
     console.log('users: ', this.props.users)
   }
 
-  renderRows = (users) => {
-    if (!users || users.size < 1) {
-      return (
-        <TableRow selected={this.isSelected(0)}>
-          <TableRowColumn>Loading...</TableRowColumn>
-        </TableRow>
-      )
-    }
-    return users.map((user, index) => {
-      return (
-        <TableRow key={index} selected={this.isSelected(index)}>
-          <TableRowColumn>{user.id}</TableRowColumn>
-          <TableRowColumn>{user.name}</TableRowColumn>
-          <TableRowColumn>{user.role}</TableRowColumn>
-        </TableRow>
-      )
-    })
-  }
-
-  renderTable = (users) => {
-    return (
-      <Table onRowSelection={this.handleRowSelection} multiSelectable={false}>
-        <TableHeader>
-          <TableRow>
-            <TableHeaderColumn>ID</TableHeaderColumn>
-            <TableHeaderColumn>Name</TableHeaderColumn>
-            <TableHeaderColumn>Role</TableHeaderColumn>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {this.renderRows(users)}
-        </TableBody>
-      </Table>
-    )
-  }
-
   render () {
     const { users } = this.props
     return (
       <div>
-        <h1 align='center'>Users</h1>
-        <div align='right'>
-          <AddSvgIcon style={iconStyles} color={green500} />
-          <RemoveSvgIcon style={iconStyles} color={red500} />
-        </div>
-        {this.renderTable(users)}
+        <Toolbar>
+          <ToolbarGroup firstChild>
+            <ToolbarTitle style={styles.toolTitle} text='Users' />
+          </ToolbarGroup>
+          <ToolbarGroup>
+            <AddSvgIcon
+              style={styles.toolIcon}
+              color={green500}
+              hoverColor={greenA700}
+              onTouchTap={this.handleAddUser}
+            />
+            <RemoveSvgIcon
+              style={styles.toolIcon}
+              color={red500}
+              hoverColor={redA100}
+              onTouchTap={this.handleRemoveUsers}
+            />
+          </ToolbarGroup>
+        </Toolbar>
+        <UserList users={users} />
       </div>
     )
   }
