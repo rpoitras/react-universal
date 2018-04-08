@@ -27,8 +27,10 @@ const webpackConfig = {
 
 if (__DEV__) {
   webpackConfig.devtool = 'inline-source-map'
+  webpackConfig.mode = 'development'
 } else if (ENABLE_PROD_SRC_MAPS) {
   webpackConfig.devtool = 'cheap-module-source-map'
+  webpackConfig.mode = 'production'
 }
 
 webpackConfig.entry = {
